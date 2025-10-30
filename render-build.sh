@@ -1,7 +1,15 @@
 #!/bin/bash
-# Render Build Script
-cd frontend || cd .
+# Simplified Render Build Script for single-repo React + Node app
+
+# Install all dependencies (root)
 npm install
+
+# Build frontend (React)
 npm run build
-cd ../server
-npm install
+
+# Install server dependencies (if package.json exists inside /server)
+if [ -d "server" ] && [ -f "server/package.json" ]; then
+  cd server
+  npm install
+  cd ..
+fi
