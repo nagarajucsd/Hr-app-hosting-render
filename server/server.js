@@ -16,14 +16,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Example: routes (uncomment & adjust)
-// import employeeRoutes from './routes/employeeRoutes.js';
-// app.use('/api/employees', employeeRoutes);
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const frontendPath = path.join(__dirname, '../dist');
+const frontendPath = path.join(__dirname, 'dist');
 app.use(express.static(frontendPath));
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
